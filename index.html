@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App de Enlaces</title>
+  <title>Votely</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/webp" href="assets/favicon.webp">
 </head>
 <body>
   <header>
-    <h1><a href="#/">App de Enlaces</a></h1>
+    <a href="#" id="link-inicio">
+      <img src="assets/favicon.webp" alt="Logo Votely" class="logo">
+      Votely
+    </a>
   </header>
 
   <main id="app"></main>
@@ -17,6 +20,12 @@
   <script src="js/api.js"></script>
   <script src="js/views/listado.js"></script>
   <script src="js/views/detalle.js"></script>
-  <script>renderListado();</script>
+  <script>
+    document.getElementById('link-inicio').addEventListener('click', (evento) => {
+      evento.preventDefault();
+      renderListado();
+    });
+    renderListado();
+  </script>
 </body>
 </html>
