@@ -1,7 +1,7 @@
 :root {
-  --color-fondo: #f7f7f8;
+  --color-fondo: #ffffff;
   --color-tarjeta: #ffffff;
-  --color-borde: #e4e4e7;
+  --color-borde: #da8db3;
   --color-texto: #1c1c1e;
   --color-texto-suave: #6b7280;
   --color-acento: #da8db3;
@@ -23,13 +23,28 @@ header {
   padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--color-borde);
   background: var(--color-tarjeta);
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-acento);
+  border-radius: var(--radio);
 }
 
 header a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   text-decoration: none;
   color: var(--color-texto);
   font-size: 1.4rem;
   font-weight: 700;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-acento);
+  object-fit: cover;
 }
 
 main {
