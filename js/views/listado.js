@@ -12,8 +12,8 @@ async function renderListado(tagActivo) {
       <h2>Agregar enlace</h2>
       <form id="form-nuevo-link">
         <input type="text" id="input-title" placeholder="Titulo" required>
-        <input type="url" id="input-url" placeholder="https://..." required>
-        <input type="text" id="input-tags" placeholder="Tags separados por coma" maxlength="100">
+        <input type="url" id="input-url" placeholder="Link: https://..." required>
+        <input type="text" id="input-tags" placeholder="Nombre de Etiqueta" maxlength="100">
         <button type="submit">Guardar</button>
       </form>
     </section>
