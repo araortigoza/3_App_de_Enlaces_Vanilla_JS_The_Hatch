@@ -1,0 +1,224 @@
+:root {
+  --color-fondo: #f7f7f8;
+  --color-tarjeta: #ffffff;
+  --color-borde: #e4e4e7;
+  --color-texto: #1c1c1e;
+  --color-texto-suave: #6b7280;
+  --color-acento: #da8db3;
+  --radio: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--color-borde);
+  background: var(--color-tarjeta);
+}
+
+header a {
+  text-decoration: none;
+  color: var(--color-texto);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+.formulario form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.2rem;
+}
+
+input, textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--color-acento);
+  color: white;
+  transition: opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-btn {
+  background: var(--color-tarjeta);
+  color: var(--color-texto-suave);
+  border: 1px solid var(--color-borde);
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+}
+
+.tag-btn.activo {
+  background: var(--color-acento);
+  color: white;
+  border-color: var(--color-acento);
+}
+
+.lista-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.tarjeta-link {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.tarjeta-link:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.tarjeta-link h3 {
+  margin: 0 0 0.3rem;
+}
+
+.tarjeta-link .url {
+  margin: 0 0 0.5rem;
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--color-texto-suave);
+}
+
+.votos {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-acento);
+}
+
+.volver {
+  background: none;
+  color: var(--color-texto-suave);
+  padding: 0;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.detalle-link {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+}
+
+.detalle-link h2 {
+  margin-top: 0;
+}
+
+.detalle-link .url {
+  display: inline-block;
+  color: var(--color-acento);
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  word-break: break-all;
+}
+
+.detalle-link #btn-votar {
+  margin-top: 0.8rem;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+}
+
+.comentarios h3 {
+  margin-bottom: 0.8rem;
+}
+
+.comentarios form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.lista-comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.comentario {
+  background: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 0.8rem 1rem;
+}
+
+.comentario strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.comentario p {
+  margin: 0;
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+}
