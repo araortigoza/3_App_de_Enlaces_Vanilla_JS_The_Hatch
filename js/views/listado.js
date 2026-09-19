@@ -2,8 +2,9 @@ async function renderListado(tagActivo) {
   const contenedor = document.getElementById('app');
   contenedor.innerHTML = '<p>Cargando enlaces...</p>';
 
-  const links = await getLinks(tagActivo);
-  const tagsUnicos = [...new Set(links.flatMap(link => link.tags))];
+  const todosLosLinks = await getLinks();
+  const tagsUnicos = [...new Set(todosLosLinks.flatMap(link => link.tags))];
+  const links = tagActivo ? todosLosLinks.filter(link => link.tags.includes(tagActivo)) : todosLosLinks;
 
   contenedor.innerHTML = `
     <section class="formulario">
@@ -11,7 +12,7 @@ async function renderListado(tagActivo) {
       <form id="form-nuevo-link">
         <input type="text" id="input-title" placeholder="Titulo" required>
         <input type="url" id="input-url" placeholder="https://..." required>
-        <input type="text" id="input-tags" placeholder="Agrega una etiqueta" maxlength="100">
+        <input type="text" id="input-tags" placeholder="Tags separados por coma" maxlength="100">
         <button type="submit">Guardar</button>
       </form>
     </section>
