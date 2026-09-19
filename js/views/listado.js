@@ -5,7 +5,7 @@ async function renderListado(tagActivo) {
   const todosLosLinks = await getLinks();
   const tagsUnicos = [...new Set(todosLosLinks.flatMap(link => link.tags))];
   const links = (tagActivo ? todosLosLinks.filter(link => link.tags.includes(tagActivo)) : todosLosLinks)
-    .sort((a, b) => a.votes - b.votes);
+    .sort((a, b) => b.votes - a.votes);
 
   contenedor.innerHTML = `
     <section class="formulario">
