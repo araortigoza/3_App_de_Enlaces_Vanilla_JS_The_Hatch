@@ -1,13 +1,16 @@
+// FUNCION PRINCIPAL PARA RENDERIZAR EL LISTADO DE LINKS
 async function renderListado(tagActivo) {
-  const contenedor = document.getElementById('app');
-  contenedor.innerHTML = '<p>Cargando enlaces...</p>';
+  const contenedor = document.getElementById('app'); // SELECCIONA EL ELEMENTO <main id="app"></main> DEL HTML
+  contenedor.innerHTML = '<p>Cargando enlaces...</p>'; // MUESTRA UNA PANTALLA DE CARGA
 
-  const todosLosLinks = await getLinks();
-  const tagsUnicos = [...new Set(todosLosLinks.flatMap(link => link.tags))];
-  const links = (tagActivo ? todosLosLinks.filter(link => link.tags.includes(tagActivo)) : todosLosLinks)
-    .sort((a, b) => b.votes - a.votes);
+  const todosLosLinks = await getLinks(); // SE LLAMA A LA FUNCION QUE TRAE TODOS LOS LINKS
+  const tagsUnicos = [...new Set(todosLosLinks.flatMap(link => link.tags))]; // SE BUSCA EL TAG DE CADA ENLACE, LOS AGREGA A UN NUEVO ARREGLO Y CON SET SE ELIMINAN DUPLICADOS Y SE CREA NUEVAMENTE UN ARREGLO CON TAGS UNICOS
+  const links = (tagActivo ? todosLosLinks.filter(link => link.tags.includes(tagActivo)) : todosLosLinks) // FILTRA POR EL TAG ACTIVO EN CASO DE TENER UN VALOR LOS ENLACES QUE TENGAN ESE TAG
+    .sort((a, b) => b.votes - a.votes); // ORDENA LOS ENLACES DE MAYOR A MENOS SEGUN LOS VOTOS
 
-  contenedor.innerHTML = `
+  // INYECCION DE HTML DINAMICO
+  contenedor.innerHTML =
+   `
     <section class="formulario">
       <h2>Agregar enlace</h2>
       <form id="form-nuevo-link">
@@ -37,28 +40,34 @@ async function renderListado(tagActivo) {
     </section>
   `;
 
+  // SE PONE EN ESCUCHA EN EL FORMULARIO, ANTE CUALQUIER EVENTO SUBMIT SE ACTIVA
   contenedor.querySelector('#form-nuevo-link').addEventListener('submit', async (evento) => {
-    evento.preventDefault();
+    evento.preventDefault(); // FRENA EL RECARGADO DE LA PAGINA
+    // OBTIENE EL TEXTO CRUDO (.VALUE) ESCRITO POR EL USUARIO
     const title = document.getElementById('input-title').value;
     const url = document.getElementById('input-url').value;
     const tags = document.getElementById('input-tags').value
-      .split(',')
-      .map(t => t.trim())
-      .filter(t => t.length > 0);
-
+      .split(',') // SEPARA LAS PALABRAS POR COMAS Y CREA UN ARREGLO
+      .map(t => t.trim()) // QUITA LOS ESPACIOS DE PRINCIPIO A FIN
+      .filter(t => t.length > 0); // ELIMINA LOS ELEMENTOS VACIOS
+    // SE LLAMA A LA FUNCION PARA CREAR LINKS
     await createLink({ title, url, tags });
+    
+    // VUELVE A RENDERIZAR TODO A LA PAGINA DEJANDO EL FILTRO INTACTO
     renderListado(tagActivo);
   });
 
+  // SE ENCARGA DE ESCUCHAR LOS CLICKS DE LA SECCION DE FILTROS
   contenedor.querySelectorAll('.tag-btn').forEach(boton => {
     boton.addEventListener('click', () => {
-      renderListado(boton.dataset.tag || null);
+      renderListado(boton.dataset.tag || null); // VUELVE A RENDERIZAR TODO A LA PAGINA CON EL FILTRO SELECCIONADO O NULL SI ES TODOS
     });
   });
 
+  // SE ENCARGA DE ESCUCHAR A TODAS LAS TARJETAS DE LINKS
   contenedor.querySelectorAll('.tarjeta-link').forEach(tarjeta => {
     tarjeta.addEventListener('click', () => {
-      renderDetalle(tarjeta.dataset.id);
+      renderDetalle(tarjeta.dataset.id); // RENDERIZA A DETALLE CON EL ID DEL LINK CLICKEADO
     });
   });
 }
