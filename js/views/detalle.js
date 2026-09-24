@@ -1,10 +1,12 @@
+// FUNCION PRINCIPAL PARA RENDERIZAR EL DETALLE DE LOS LINKS
 async function renderDetalle(id) {
-  const contenedor = document.getElementById('app');
-  contenedor.innerHTML = '<p>Cargando enlace...</p>';
+  const contenedor = document.getElementById('app'); // SELECCIONA EL ELEMENTO <main id="app"></main> DEL HTML
+  contenedor.innerHTML = '<p>Cargando enlace...</p>'; // MUESTRA UNA PANTALLA DE CARGA
 
-  const link = await getLinkById(id);
-  const comentarios = await getComments(id);
+  const link = await getLinkById(id); // CONSULTA A LA API LOS DATOS DEL ENLACE
+  const comentarios = await getComments(id); // CONSULTA A LA API LOS COMENTARIOS DE ESE ENLACE
 
+  // INYECCION HTML
   contenedor.innerHTML = `
     <button id="btn-volver" class="volver">← Volver</button>
 
@@ -34,21 +36,25 @@ async function renderDetalle(id) {
     </section>
   `;
 
+  // SE ENCARGA DE ESCUCHAR EL BOTON DE VOLVER
   contenedor.querySelector('#btn-volver').addEventListener('click', () => {
-    renderListado();
+    renderListado(); // RENDERIZA AL LISTADO DE LINK
   });
 
+  // SE ENCARGA DE ESCUCHAR LOS CLICKS EN EL BOTON DE VOTAR
   contenedor.querySelector('#btn-votar').addEventListener('click', async () => {
-    await voteLink(id);
-    renderDetalle(id);
+    await voteLink(id); // LLAMA A LA API PARA REALIZAR LA VOTACION
+    renderDetalle(id); // VULVE A RENDERIZAR A DETALLE CON LOS DATOS ACTUALIZADOS
   });
 
+  // SE ENCARGA DE ESCUCHAR EL FORMULARIO DE COMENTARIOS
   contenedor.querySelector('#form-comentario').addEventListener('submit', async (evento) => {
-    evento.preventDefault();
+    evento.preventDefault(); // FRENA EL RECARGADO DE LA PAGINA
+    // TRAE EL TEXTO ESCRITO POR EL USUARIO
     const autor = document.getElementById('input-autor').value;
     const text = document.getElementById('input-text').value;
 
-    await createComment(id, { autor, text });
-    renderDetalle(id);
+    await createComment(id, { autor, text }); // LLAMA A LA API PARA CREAR EL COMENTARIO
+    renderDetalle(id); // VULVE A RENDERIZAR A DETALLE CON LOS DATOS ACTUALIZADOS
   });
 }
